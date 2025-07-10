@@ -1,0 +1,48 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../../components/FormattedDate.astro';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Blog - ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>Blog</h1>
+			<p style="color: var(--text-secondary); margin-bottom: 3rem;">
+				Thoughts on distributed systems, pragmatic engineering, and building products.
+			</p>
+			<ul class="post-list">
+				{
+					posts.map((post) => (
+						<li class="post-item">
+							<article>
+								<h2 style="margin: 0 0 0.5rem;">
+									<a href={`/blog/${post.id}/`}>
+										{post.data.title}
+									</a>
+								</h2>
+								<p class="post-meta">
+									<FormattedDate date={post.data.pubDate} />
+								</p>
+								<p style="color: var(--text-secondary);">{post.data.description}</p>
+							</article>
+						</li>
+					))
+				}
+			</ul>
+		</main>
+		<Footer />
+	</body>
+</html>

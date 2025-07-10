@@ -1,0 +1,68 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../components/FormattedDate.astro';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+).slice(0, 3);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="hero">
+				<h1>Ryan Rasti</h1>
+				<p>Engineering leader building pragmatic solutions to complex problems</p>
+			</section>
+
+			<section style="margin-top: 4rem;">
+				<h2>Recent Posts</h2>
+				<ul class="post-list">
+					{
+						posts.map((post) => (
+							<li class="post-item">
+								<h3 style="margin: 0 0 0.5rem;">
+									<a href={`/blog/${post.id}/`}>
+										{post.data.title}
+									</a>
+								</h3>
+								<p class="post-meta">
+									<FormattedDate date={post.data.pubDate} />
+								</p>
+								<p style="color: var(--text-secondary);">{post.data.description}</p>
+							</li>
+						))
+					}
+				</ul>
+				<p style="text-align: center; margin-top: 3rem;">
+					<a href="/blog" style="font-weight: 500;">View all posts →</a>
+				</p>
+			</section>
+
+			<section style="margin-top: 6rem;">
+				<h2>About</h2>
+				<p>
+					Former Google Tech Lead with 6 years building large-scale distributed systems protecting 4B+ users. 
+					Recently CTO & Cofounder at Tavoro, where I built a modern WMS for e-commerce warehouses from scratch.
+				</p>
+				<p>
+					I focus on pragmatic engineering solutions that maximize developer productivity and solve real business problems. 
+					My experience spans distributed systems, security engineering, data infrastructure, and zero-to-one product building.
+				</p>
+				<p>
+					Currently exploring opportunities in AI infrastructure and developer tooling at companies with strong engineering cultures.
+				</p>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
