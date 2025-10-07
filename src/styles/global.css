@@ -88,6 +88,8 @@ img {
 	border-radius: 0.5rem;
 }
 
+/* Blog post image styles are in BlogPost.astro */
+
 code {
 	font-family: 'SF Mono', Monaco, Consolas, 'Courier New', monospace;
 	font-size: 0.875em;
