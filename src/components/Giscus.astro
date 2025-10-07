@@ -13,13 +13,49 @@
     data-reactions-enabled="1"
     data-emit-metadata="0"
     data-input-position="top"
-    data-theme="preferred_color_scheme"
+    data-theme="light"
     data-lang="en"
     data-loading="lazy"
     crossorigin="anonymous"
     async>
   </script>
 </div>
+
+<script>
+  // Set initial theme
+  function setGiscusTheme(theme) {
+    const iframe = document.querySelector('iframe.giscus-frame');
+    if (iframe) {
+      iframe.contentWindow.postMessage(
+        { giscus: { setConfig: { theme: theme === 'dark' ? 'dark' : 'light' } } },
+        'https://giscus.app'
+      );
+    }
+  }
+
+  // Set theme on load
+  const savedTheme = localStorage.getItem('theme');
+  const currentTheme = savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  
+  // Wait for Giscus to load then set theme
+  const observer = new MutationObserver((mutations) => {
+    const iframe = document.querySelector('iframe.giscus-frame');
+    if (iframe) {
+      setGiscusTheme(currentTheme);
+      observer.disconnect();
+    }
+  });
+  
+  observer.observe(document.querySelector('.giscus-wrapper'), {
+    childList: true,
+    subtree: true
+  });
+
+  // Listen for theme changes
+  document.addEventListener('theme-change', (e) => {
+    setGiscusTheme(e.detail.theme);
+  });
+</script>
 
 <style>
   .giscus-wrapper {

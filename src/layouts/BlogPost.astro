@@ -6,6 +6,7 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Giscus from '../components/Giscus.astro';
 import { Image } from 'astro:assets';
+import ThemeToggle from '../components/ThemeToggle.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
@@ -58,6 +59,27 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			.last-updated-on {
 				font-style: italic;
 			}
+			/* Style verdict paragraphs */
+			.prose p strong:only-child {
+				display: block;
+				margin: 2rem 0;
+				padding: 1rem;
+				background-color: var(--bg-secondary);
+				border-radius: 6px;
+				font-style: italic;
+				clear: both;
+			}
+			
+			/* For mobile, override inline float styles */
+			@media (max-width: 640px) {
+				.prose img {
+					float: none !important;
+					display: block !important;
+					width: 100% !important;
+					max-width: 280px !important;
+					margin: 1.5rem auto !important;
+				}
+			}
 		</style>
 	</head>
 
@@ -89,5 +111,6 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			</article>
 		</main>
 		<Footer />
+		<ThemeToggle />
 	</body>
 </html>

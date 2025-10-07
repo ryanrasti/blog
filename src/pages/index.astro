@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../components/FormattedDate.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -64,5 +65,6 @@ const posts = (await getCollection('blog')).sort(
 			</section>
 		</main>
 		<Footer />
+		<ThemeToggle />
 	</body>
 </html>
