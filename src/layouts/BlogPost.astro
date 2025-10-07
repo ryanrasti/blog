@@ -10,7 +10,7 @@ import ThemeToggle from '../components/ThemeToggle.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, subtitle, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
 <html lang="en">
@@ -103,6 +103,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 							}
 						</div>
 						<h1>{title}</h1>
+						{subtitle && <p style="font-size: 1.25rem; color: var(--text-secondary); margin: -0.5rem 0 1.5rem 0; font-style: italic;">{subtitle}</p>}
 						<hr />
 					</div>
 					<slot />
