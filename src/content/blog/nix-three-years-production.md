@@ -6,9 +6,16 @@ updatedDate: "Oct 8 2025"
 heroImage: "/src/assets/nix-production-optimized.jpg"
 ---
 
-Three years ago, I made a bet on Nix. Not just for developer environments, but for everything - CI/CD, production deployments, even running Postgres locally. With a team of 2-4 engineers building a full-stack Elixir/React application, we needed every productivity edge we could get.
+Three years ago, I made a bet on Nix. Not just for developer environments, but for everything - CI/CD, production deployments, even running Postgres locally. With a team of four engineers building a full-stack Elixir/React application, we needed every productivity edge we could get.
 
 Following my [Elixir retrospective](/blog/elixir-three-years-production), here's what I learned from going all-in on Nix. Spoiler: the promise of "reproducible builds everywhere" is real, but the path there is rougher than any documentation will tell you.
+
+In this post, I'll cover:
+
+- **[The Good](#the-good):** The superpowers Nix gave us
+- **[The Bad](#the-bad):** The real-world pain points and hidden costs
+- **[The Path Forward](#the-path-forward-what-nix-really-needs):** Three concrete proposals for what Nix needs to win
+- **[The Vision](#the-λ-in-the-road):** Why Nix is poised to become the foundation for a new, open-source cloud
 
 # The Good
 

@@ -33,6 +33,7 @@ html {
 	-webkit-text-size-adjust: 100%;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	scroll-padding-top: 80px; /* Offset for fixed header */
 }
 
 body {
